@@ -1,0 +1,33 @@
+@startuml
+
+interface Chat {
+    +{abstract} broadcastMessage(message: String): void
+    +{abstract} subscribe(client: ClientHandler): void
+    +{abstract} unsubscribe(client: ClientHandler): void
+    +{abstract} isNicknameOccupied(nickname: String): boolean
+    +{abstract} getAuthenticationService(): AuthenticationService
+}
+
+class ServerChat implements Chat {
+    - serverSocket: ServerSocket
+    - clients: Set<ClientHandler>
+    - authenticationService: AuthenticationService
+}
+
+class ClientHandler {
+    - name: String
+    - in: InputStream
+    - out: OutputStream
+    - socket: Socket
+    - chat: Chat
+
+    + sendMessage(message: String)
+    + receiveMessage()
+    + getName(): String
+}
+
+class AuthenticationService {
+    String findNicknameByLoginAndPassword();
+}
+
+@enduml

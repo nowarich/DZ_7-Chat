@@ -1,0 +1,17 @@
+@startuml
+
+class ChatFrame {
+    - submitListener: SubmitActionListener
+
+    + ChatFrame(transmitter: Consumer<String>)
+    + append(msg: String): void
+}
+
+class SubmitActionListener implements ActionListener {
+    - textField: TextField
+    - callback: Consumer<String>
+
+    + SubmitActionListener(callback: Consumer<String>)
+}
+
+@enduml

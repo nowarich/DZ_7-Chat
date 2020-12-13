@@ -1,0 +1,33 @@
+@startuml
+
+actor ClientOne as One
+actor ClientN as N
+
+One --> App : " starts application"
+N --> App
+
+package "Locally Installed Application" as App {
+    "ClientApp.class" as (CA)
+    "Client.class" as (C)
+    "ClientChatAdapter.class" as (CCA)
+    "ChatFrame.class" as (CF)
+    "SubmitActionListener.class" as (SAL)
+
+    App ..> (CA)
+    (CA) -> (CCA) : " starts chat processes"
+    (CCA) --> (C) : " establishes connection\nwith server"
+    (CCA) --> (CF) : " initializes GUI"
+    (CF) --> (SAL)
+}
+
+package "Remote Server Application" as Server {
+    "ServerChat.class" as (CH)
+}
+
+rectangle Network {
+}
+
+(C) <....> Network : "Communication with Server"
+Network <...> Server
+
+@enduml
