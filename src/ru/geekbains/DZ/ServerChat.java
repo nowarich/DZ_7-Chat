@@ -51,7 +51,7 @@ public class ServerChat implements Chat {
 //                if (i == 2) {
 //                    mayBePMessage[i] = ":";
 //                }
-                pMessage = pMessage + " " + mayBePMessage[i];
+                pMessage = pMessage + " " + mayBePMessage[i]; //pMessage.concat(mayBePMessage[i]);
             }
             for (ClientHandler client: clients) {
                 if (client.getName().equals(mayBePMessage[2])) {
