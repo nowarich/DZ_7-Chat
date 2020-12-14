@@ -98,6 +98,9 @@ public class ClientHandler {
                     chat.unsubscribe(this);
                     chat.broadcastMessage(String.format("[%s] logged out", name));
                     break;
+//                } else if (message.startsWith("-pm")) {
+//                    System.out.println("PM!");
+//                    break;
                 }
                 chat.broadcastMessage(String.format("[%s]: %s", name, message));
             } catch (Exception e) {

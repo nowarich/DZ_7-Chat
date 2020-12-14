@@ -1,0 +1,24 @@
+@startuml
+
+
+class Client {
+    - socket: Socket
+    - in: DataInputStream
+    - out: DataOutputStream
+
+    -- constructors --
+
+    + sendMessage(msg: String) throws ClientConnectionException: void
+    + receiveMessage() throws ClientConnectionException: String
+    + close(): void
+}
+
+class ClientChatAdapter {
+    - chat: ChatFrame
+    - client: Client
+}
+
+class ClientConnectionException extends RuntimeException {
+}
+
+@enduml

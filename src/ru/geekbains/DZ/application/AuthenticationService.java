@@ -7,9 +7,9 @@ public class AuthenticationService {
 
     public AuthenticationService() {
         entries = Set.of(
-                new CredentialsEntry("l1", "p1", "nickname1"),
-                new CredentialsEntry("l2", "p2", "nickname2"),
-                new CredentialsEntry("l3", "p3", "nickname3")
+                new CredentialsEntry("l1", "p1", "nick1"),
+                new CredentialsEntry("l2", "p2", "nick2"),
+                new CredentialsEntry("l3", "p3", "nick3")
         );
 
     }
