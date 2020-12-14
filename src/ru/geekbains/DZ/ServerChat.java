@@ -43,12 +43,19 @@ public class ServerChat implements Chat {
     public void broadcastMessage(String message) {
         String[] mayBePMessage = message.split("\\s");
         if (mayBePMessage[1].equals("-pm")) {
-//            System.out.println("PM!!");
-            message.substring(4);
+//            int pmStartPos = message.indexOf(" ", 4);
+//            String pMessage = message.substring(pmStartPos);
+//            System.out.println(pmStartPos + pMessage);
+            String pMessage = mayBePMessage[0] + " PM:";
+            for (int i = 2; i < mayBePMessage.length; i++) {
+//                if (i == 2) {
+//                    mayBePMessage[i] = ":";
+//                }
+                pMessage = pMessage + " " + mayBePMessage[i];
+            }
             for (ClientHandler client: clients) {
-//                System.out.println(client.getName());
                 if (client.getName().equals(mayBePMessage[2])) {
-                    client.sendMessage(mayBePMessage[3]);
+                    client.sendMessage(pMessage);
                 }
             }
         } else {
