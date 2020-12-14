@@ -41,8 +41,20 @@ public class ServerChat implements Chat {
 
     @Override
     public void broadcastMessage(String message) {
-        for (ClientHandler client: clients) {
-            client.sendMessage(message);
+        String[] mayBePMessage = message.split("\\s");
+        if (mayBePMessage[1].equals("-pm")) {
+//            System.out.println("PM!!");
+            message.substring(4);
+            for (ClientHandler client: clients) {
+//                System.out.println(client.getName());
+                if (client.getName().equals(mayBePMessage[2])) {
+                    client.sendMessage(mayBePMessage[3]);
+                }
+            }
+        } else {
+            for (ClientHandler client : clients) {
+                client.sendMessage(message);
+            }
         }
     }
 
