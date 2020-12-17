@@ -1,4 +1,4 @@
-package ru.geekbains.DZ.application;
+package ru.geekbains.DZ;
 
 import java.util.Set;
 
