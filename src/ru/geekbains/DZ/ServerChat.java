@@ -1,7 +1,5 @@
 package ru.geekbains.DZ;
 
-import ru.geekbains.DZ.application.AuthenticationService;
-
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
@@ -40,7 +38,7 @@ public class ServerChat implements Chat {
     }
 
     @Override
-    public void broadcastMessage(String message) {
+    public synchronized void broadcastMessage(String message) {
         String[] mayBePMessage = message.split("\\s");
         if (mayBePMessage[1].equals("-pm")) {
 //            int pmStartPos = message.indexOf(" ", 4);
@@ -66,7 +64,7 @@ public class ServerChat implements Chat {
     }
 
     @Override
-    public boolean isNicknameOccupied(String nickname) {
+    public synchronized boolean isNicknameOccupied(String nickname) {
         for (ClientHandler client : clients) {
             if (client.getName().equals(nickname)) {
                 return true;
@@ -79,14 +77,13 @@ public class ServerChat implements Chat {
 //    public void receiveMessage() {
 //
 //    }
-
     @Override
-    public void subscribe(ClientHandler client) {
+    public synchronized void subscribe(ClientHandler client) {
         clients.add(client);
     }
 
     @Override
-    public void unsubscribe(ClientHandler client) {
+    public synchronized void unsubscribe(ClientHandler client) {
         clients.remove(client);
     }
 }
