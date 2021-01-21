@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a9bf49f-982c-45e1-80e6-7363962bfec8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ru/geekbains/DZ/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DZ_7-Chat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DZ_7-Chat.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DZ_7-Chat/META-INF/DZ_7-Chat.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DZ_7-Chat/ru/geekbains/DZ/AuthenticationService$CredentialsEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DZ_7-Chat/ru/geekbains/DZ/AuthenticationService$CredentialsEntry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DZ_7-Chat/ru/geekbains/DZ/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DZ_7-Chat/ru/geekbains/DZ/AuthenticationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DZ_7-Chat/ru/geekbains/DZ/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DZ_7-Chat/ru/geekbains/DZ/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/geekbains/DZ/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/geekbains/DZ/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/geekbains/DZ/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/geekbains/DZ/ClientHandler.java" afterDir="false" />
-    </list>
+    <list default="true" id="9a9bf49f-982c-45e1-80e6-7363962bfec8" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ru/geekbains/DZ/ClientHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="85" column="111" lean-forward="true" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="111" />
+            <state relative-caret-position="376">
+              <caret line="96" column="30" lean-forward="true" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -141,7 +130,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -239,9 +228,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultPlantUmlFileTemplate" value="UML Sequence" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1611228416189" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1611228449144" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../trpo-dz2" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
@@ -356,8 +345,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="UI Designer" order="1" />
@@ -614,8 +602,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/geekbains/DZ/ClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="85" column="111" lean-forward="true" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="111" />
+        <state relative-caret-position="376">
+          <caret line="96" column="30" lean-forward="true" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
