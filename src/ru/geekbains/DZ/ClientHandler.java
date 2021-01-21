@@ -44,6 +44,7 @@ public class ClientHandler {
     private void listen() { // Handler слушает клиента
         new Thread(() -> {
             doAuth();
+            sendMessage(name + " has joined a chat");
             receiveMessage();
         }).start();
     }
@@ -71,19 +72,18 @@ public class ClientHandler {
             timeout.start();
             while (true) {
                 sendMessage("Please authorise. Sample: [-auth login password]");
-                String mayBeCredetials = in.readUTF();
-                if (mayBeCredetials.startsWith("-auth"))
+                String mayBeCredentials = in.readUTF();
+                if (mayBeCredentials.startsWith("-auth"))
                 {
-                    String[] credentials = mayBeCredetials.split("\\s");
+                    String[] credentials = mayBeCredentials.split("\\s");
 
-                    // ===== new authentication using mySQL here ======
+                    /** ===== new authentication using mySQL here ======
+                     */
                     String email = credentials[1];
                     String password = credentials[2];
 
                     try {
-
-                        Class.forName("com.mysql.jdbc.Driver");
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?serverTimezone=UTC","root", "");
                         PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
 
                         statement.setString(1, email);
@@ -91,15 +91,31 @@ public class ClientHandler {
 
                         ResultSet rs = statement.executeQuery();
                         if (rs.next()) {
-                            return new User(
+                            User user = new User(
                                     rs.getLong("id"),
                                     rs.getString("name"),
                                     rs.getString("email"),
                                     rs.getString("password")
                             );
-                        }
+                            if (user.getName() != null) {
+                                if (!chat.isNicknameOccupied(user.getName())) {
+                                    sendMessage("[INFO] Auth OK");
+                                    name = user.getName();
 
+                                    chat.broadcastMessage(String.format("[%s] logged in", name));
+                                    chat.subscribe(this);
+                                    timeout.interrupt();
+                                    return user;
+                                } else {
+                                    sendMessage("[INFO] Current user is already logged in");
+                                }
+
+                            } else {
+                                sendMessage("[INFO] Wrong login or password");
+                            }
+                        }
                         return null;
+
                     } catch (Exception e) {
                         throw new RuntimeException("SWW", e);
                     }
@@ -108,22 +124,7 @@ public class ClientHandler {
 
 //                    String mayBeNickname = chat.getAuthenticationService()
 //                            .findNicknameByLoginAndPassword(credentials[1], credentials[2]);
-//                    if (mayBeNickname != null) {
-//                        if (!chat.isNicknameOccupied(mayBeNickname)) {
-//                            sendMessage("[INFO] Auth OK");
-//                            name = mayBeNickname;
-//
-//                            chat.broadcastMessage(String.format("[%s] logged in", name));
-//                            chat.subscribe(this);
-//                            timeout.interrupt();
-//                            return;
-//                        } else {
-//                            sendMessage("[INFO] Current user is already logged in");
-//                        }
-//
-//                    } else {
-//                        sendMessage("[INFO] Wrong login or password");
-//                    }
+
                 }
 
             }
