@@ -5,10 +5,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
+import java.util.Objects;
 
 import static java.lang.Thread.sleep;
 
@@ -18,11 +17,12 @@ public class ClientHandler {
     private DataOutputStream out;
     private Socket socket;
     private Chat chat;
-
+    private User user;
 
     public ClientHandler(Socket socket, Chat chat) {
         this.socket = socket;
         this.chat = chat;
+//        this.user = user;
 //        name = String.valueOf(socket.getPort());
         try {
             in = new DataInputStream(socket.getInputStream());
@@ -43,7 +43,7 @@ public class ClientHandler {
 
     private void listen() { // Handler слушает клиента
         new Thread(() -> {
-            doAuth();
+            user = doAuth();
             sendMessage(name + " has joined a chat");
             receiveMessage();
         }).start();
@@ -81,9 +81,10 @@ public class ClientHandler {
                      */
                     String email = credentials[1];
                     String password = credentials[2];
-
+                    Objects.requireNonNull(credentials[1], "Email cannot be null");
+                    Objects.requireNonNull(credentials[2], "Password cannot be null");
                     try {
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?serverTimezone=UTC","root", "");
+                        Connection connection = DatabaseService.connect() ;
                         PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
 
                         statement.setString(1, email);
@@ -166,6 +167,15 @@ public class ClientHandler {
 //                } else if (message.startsWith("-pm")) {
 //                    System.out.println("PM!");
 //                    break;
+                }
+                if (message.startsWith("-newnick")){
+                    String oldName = name;
+                    String[] mayBeNewNick = message.split("\\s");
+                    name = mayBeNewNick[1];
+                    user.setName(mayBeNewNick[1]);
+                    UserRepository userRepo = new UserRepository();
+                    userRepo.update(user);
+                    chat.broadcastMessage(String.format("[%s] is now -> [%s]", oldName, name));
                 }
                 chat.broadcastMessage(String.format("[%s]: %s", name, message));
             } catch (Exception e) {
