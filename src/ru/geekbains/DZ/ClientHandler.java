@@ -81,7 +81,9 @@ public class ClientHandler {
                     String password = credentials[2];
 
                     try {
-                        Connection connection = DriverManager.getConnection("jdbc:mysql//localhost:3306/test");
+
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test");
                         PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
 
                         statement.setString(1, email);
