@@ -1,5 +1,9 @@
-package ru.geekbains.DZ.application;
+package ru.geekbains.DZ;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Set;
 
 public class AuthenticationService {
