@@ -173,9 +173,9 @@ public class ClientHandler {
             try {
                 String message = in.readUTF();
                 if (message.startsWith("-exit")) {
-                    chat.unsubscribe(this);
                     chat.broadcastMessage(String.format("[%s] logged out", name));
                     logger.info(String.format("[%s] logged out", name));
+                    chat.unsubscribe(this);
                     break;
 //                } else if (message.startsWith("-pm")) {
 //                    System.out.println("PM!");
