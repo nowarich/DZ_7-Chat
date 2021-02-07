@@ -14,5 +14,3 @@ Login time out reached. Connection is terminated.
 [TheProdigy]: Hello all!
 [INFO] Auth OK
 [TheProdigy]: Hello
-[INFO] Auth OK
-[TheProdigy]: Hello

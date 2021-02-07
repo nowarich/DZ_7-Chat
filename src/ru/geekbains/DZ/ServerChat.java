@@ -1,5 +1,7 @@
 package ru.geekbains.DZ;
 
+import org.apache.log4j.Logger;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
@@ -10,6 +12,7 @@ public class ServerChat implements Chat {
     private ServerSocket serverSocket;
     private Set<ClientHandler> clients;
     private AuthenticationService authenticationService;
+    private static final Logger logger =  Logger.getLogger(ServerChat.class);
 
     public ServerChat() {
         start();
@@ -25,14 +28,17 @@ public class ServerChat implements Chat {
             serverSocket = new ServerSocket(8888);
             clients = new HashSet<>();
             authenticationService = new AuthenticationService();
+            logger.debug("Server has started");
 
             while (true) {
                 System.out.println("Server is waiting for a connection");
                 Socket socket = serverSocket.accept();
                 ClientHandler clientHandler = new ClientHandler(socket, this);
                 System.out.println(String.format("> %s > Client [%s] successfully logged in", new Date(), clientHandler.getName()));
+                logger.debug(String.format("> %s > Client [%s] successfully logged in", new Date(), clientHandler.getName()));
             }
         } catch (Exception e) {
+            logger.error(e);
             e.printStackTrace();
         }
     }

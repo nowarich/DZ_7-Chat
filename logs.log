@@ -1,0 +1,18 @@
+2021-02-07 17:24:50 DEBUG ServerChat:31 - Server has started
+2021-02-07 17:25:25 DEBUG ServerChat:38 - > Sun Feb 07 17:25:25 MSK 2021 > Client [null] successfully logged in
+2021-02-07 17:28:50 DEBUG ServerChat:38 - > Sun Feb 07 17:28:50 MSK 2021 > Client [null] successfully logged in
+2021-02-07 17:45:10 DEBUG ServerChat:31 - Server has started
+2021-02-07 17:45:16 DEBUG ServerChat:38 - > Sun Feb 07 17:45:16 MSK 2021 > Client [49750] successfully logged in
+2021-02-07 17:45:27 DEBUG ClientHandler:112 - [TheProdigy] logged in
+2021-02-07 17:45:27 DEBUG ClientHandler:51 - TheProdigy has joined a chat
+2021-02-07 17:45:31 DEBUG ClientHandler:189 - [TheProdigy]: Hello
+2021-02-07 17:45:35 DEBUG ClientHandler:189 - [TheProdigy]: Pleaple
+2021-02-07 17:45:42 DEBUG ClientHandler:172 - [TheProdigy] logged out
+2021-02-07 17:59:20 INFO  ClientHandler:114 - [TheProdigy] logged in
+2021-02-07 17:59:20 ERROR ClientHandler:76 - SWW
+java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleep(Native Method)
+	at ru.geekbains.DZ.ClientHandler.lambda$doAuth$1(ClientHandler.java:64)
+	at java.base/java.lang.Thread.run(Thread.java:830)
+2021-02-07 17:59:24 INFO  ClientHandler:195 - [TheProdigy]: Hello
+2021-02-07 17:59:26 INFO  ClientHandler:195 - [TheProdigy]: all

@@ -1,5 +1,7 @@
 package ru.geekbains.DZ;
 
+import org.apache.log4j.Logger;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,12 +20,13 @@ public class ClientHandler {
     private Socket socket;
     private Chat chat;
     private User user;
+    private static final Logger logger =  Logger.getLogger(ClientHandler.class);
 
     public ClientHandler(Socket socket, Chat chat) {
         this.socket = socket;
         this.chat = chat;
 //        this.user = user;
-//        name = String.valueOf(socket.getPort());
+        name = String.valueOf(socket.getPort());
         try {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
@@ -45,6 +48,7 @@ public class ClientHandler {
         new Thread(() -> {
             user = doAuth();
             sendMessage(name + " has joined a chat");
+            logger.debug(name + " has joined a chat");
             receiveMessage();
         }).start();
     }
@@ -59,14 +63,17 @@ public class ClientHandler {
                 try {
                     sleep(120000);
                     sendMessage("Login time out reached. Connection is terminated.");
+                    logger.error("Login time out reached. Connection is terminated.");
                     try {
                         socket.close();
                         return;
                     } catch (IOException e) {
                         e.printStackTrace();
+                        logger.error("SWW", e);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    logger.error("SWW", e);
                 }
             });
             timeout.start();
@@ -104,11 +111,13 @@ public class ClientHandler {
                                     name = user.getName();
 
                                     chat.broadcastMessage(String.format("[%s] logged in", name));
+                                    logger.info(String.format("[%s] logged in", name));
                                     chat.subscribe(this);
                                     timeout.interrupt();
                                     return user;
                                 } else {
                                     sendMessage("[INFO] Current user is already logged in");
+                                    logger.debug("[INFO] Current user is already logged in");
                                 }
 
                             } else {
@@ -118,6 +127,7 @@ public class ClientHandler {
                         return null;
 
                     } catch (Exception e) {
+                        logger.error("SWW", e);
                         throw new RuntimeException("SWW", e);
                     }
 
@@ -131,6 +141,7 @@ public class ClientHandler {
             }
 
         } catch (Exception e) {
+            logger.error("SWW", e);
             throw new RuntimeException("SWW", e);
         }
     }
@@ -151,6 +162,7 @@ public class ClientHandler {
         try {
             out.writeUTF(message);
         } catch (Exception e) {
+            logger.error("SWW", e);
             throw new RuntimeException("SWW", e);
         }
 
@@ -163,6 +175,7 @@ public class ClientHandler {
                 if (message.startsWith("-exit")) {
                     chat.unsubscribe(this);
                     chat.broadcastMessage(String.format("[%s] logged out", name));
+                    logger.info(String.format("[%s] logged out", name));
                     break;
 //                } else if (message.startsWith("-pm")) {
 //                    System.out.println("PM!");
@@ -176,8 +189,10 @@ public class ClientHandler {
                     UserRepository userRepo = new UserRepository();
                     userRepo.update(user);
                     chat.broadcastMessage(String.format("[%s] is now -> [%s]", oldName, name));
+                    logger.debug(String.format("[%s] is now -> [%s]", oldName, name));
                 }
                 chat.broadcastMessage(String.format("[%s]: %s", name, message));
+                logger.info(String.format("[%s]: %s", name, message));
             } catch (Exception e) {
                 throw new RuntimeException("SWW", e);
             }
